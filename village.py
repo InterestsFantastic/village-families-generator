@@ -17,19 +17,51 @@ def r4d20_itemized():
 def r2d6():
     return roll() + roll()
 
-def families_make():
-    '''Creates families.
+class Family:
+    def __init__(self, name):
+        self.name = name
+        self.members_make()
+        self.industry_make()
+
+    def members_make(self):
+        '''Determines number of members in family. Default is 1d20.'''
+        self.members = roll(20)
+
+    def industry_make(self):
+        '''Determines what industry is performed by family. Roll 2d6. First
+    dice 1-5 = primary. 6,6 tertiary, otherwise secondary.'''
+        d1 = roll()
+        d2 = roll()
+        if d1 < 6:
+            self.industry = 1
+        else:
+            if d2 < 6:
+                self.industry = 2
+            else:
+                self.industry = 3
+
+class Village:
+    def __init__(self):
+        self.families_make()
+
+    def families_make(self):
+        '''Creates families.
     Roll sets of 4d20. Each d20 is a family. Stop (using entire set) when the
     total population meets or exceeds 100.'''
-    families = {} 
-    # families structure = family name : number of people in family
-    
-    while sum(families.values()) < 100:
-        for people in r4d20_itemized():
-            name = 'family' + str(len(families))
-            families[name] = people
-    
-    return families
+
+##def families_make():
+##    '''Creates families.
+##    Roll sets of 4d20. Each d20 is a family. Stop (using entire set) when the
+##    total population meets or exceeds 100.'''
+##    families = {} 
+##    # families structure = family name : number of people in family
+##    
+##    while sum(families.values()) < 100:
+##        for people in r4d20_itemized():
+##            name = 'family' + str(len(families))
+##            families[name] = people
+##    
+##    return families
 
 def sort_families_by_pop(families, low_first=False):
     '''Returns dict of families sorted by their population, largest to
@@ -89,3 +121,7 @@ if __name__ == '__main__':
 # Avg. Number of Families: 11.748
 # When using fistfulls of 10d20, average pop only rose to 145. I bet
 # this would be an interesting curve.
+
+
+# Pariah d20 reverse order.
+# Leader d50.
