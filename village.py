@@ -47,7 +47,6 @@ def sort_families_by_pop(families, low_first=False):
 
     return sorted_families
 
-
 def basic_stats(runs=2000):
     '''Tracks monte-carlo stats, 2000 runs by default.
     Average population of the village.
