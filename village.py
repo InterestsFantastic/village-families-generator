@@ -46,22 +46,20 @@ class Village:
 
     def families_make(self):
         '''Creates families.
-    Roll sets of 4d20. Each d20 is a family. Stop (using entire set) when the
-    total population meets or exceeds 100.'''
+        Roll sets of 4d20. Each d20 is a family. Stop (using entire set)
+        when the total population meets or exceeds 100.'''
 
-##def families_make():
-##    '''Creates families.
-##    Roll sets of 4d20. Each d20 is a family. Stop (using entire set) when the
-##    total population meets or exceeds 100.'''
-##    families = {} 
-##    # families structure = family name : number of people in family
-##    
-##    while sum(families.values()) < 100:
-##        for people in r4d20_itemized():
-##            name = 'family' + str(len(families))
-##            families[name] = people
-##    
-##    return families
+        self.families = []
+        
+        while sum(self.families) < 100:
+            for r in range(4):
+                name = 'family'
+                #+ str(len(families))
+                #     while sum(self.families) < 100:
+#TypeError: unsupported operand type(s) for +: 'int' and 'Family'
+                self.families.append(Family(name))
+
+v = Village()
 
 def sort_families_by_pop(families, low_first=False):
     '''Returns dict of families sorted by their population, largest to
